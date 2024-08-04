@@ -9981,10 +9981,38 @@ a, button, .btn {
     transition: width .2s
 }
 
+.logo-container {
+    position: absolute;
+    padding-top: 50px;
+    left: 0;
+    margin: 10px;
+    /* Adjust as needed */
+    width: 14%;
+    /* Adjust the size as needed */
+    height: 60px;
+    background-image: url('./assets/platform-logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.logo-container-login {
+    padding-top: 50px;
+    left: 0;
+    margin: 10px;
+    /* Adjust as needed */
+    width: 20%;
+    /* Adjust the size as needed */
+    height: 60px;
+    background-image: url('./assets/platform-logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .app-header__logo .logo-src {
     height: 23px;
     width: 97px;
-    background: url(assets/images/logo-inverse.png)
+    background: url(assets/platform-logo.png)
 }
 
 .app-header__menu, .app-header__mobile-menu {

@@ -12,16 +12,21 @@
 		<meta name="msapplication-tap-highlight" content="no">
 		<link href="{{ asset('main.css')}}" rel="stylesheet"/>
         {# bootstrap stylesheet link #}
-        <link rel="stylesheets" href="{{asset('assets/bootstrap.min.css') }}">
+        <link rel="stylesheets" href="{{asset('assets/bootstrap.min.css') }}" defer>
         {% block stylesheets %}{% endblock %}
         {# bootstrap JS link#}
-        <script src="{{asset('assets/scripts/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{asset('assets/scripts/bootstrap.bundle.min.js') }}" defer></script>
         {% block javascripts %}{% endblock %}
 		</head>
+		{#{% block logo %}
+			<div class="logo-container-login">
+			</div>
+			{% endblock %}#}
 		{% block body %}
 
 			<body>
 				{% include 'ui/navbar.html.twig' %}
+				
 				<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 
 					<div class="ui-theme-settings">
@@ -235,7 +240,6 @@
 					<div class="app-main">
 						<div class="app-sidebar sidebar-shadow">
 							<div class="app-header__logo">
-								<div class="logo-src"></div>
 								<div class="header__pane ml-auto">
 									<div>
 										<button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">

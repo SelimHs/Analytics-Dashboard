@@ -1,4 +1,56 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Hello MainController!{% endblock %}
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Language" content="en">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Dashboard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+		<meta name="msapplication-tap-highlight" content="no">
+		<link
+		href="{{ asset('main.css')}}" rel="stylesheet"/>
+		{# bootstrap stylesheet link #}
+		<link rel="stylesheets" href="{{asset('assets/bootstrap.min.css') }}" defer> {% block stylesheets %}{% endblock %}
+		{# bootstrap JS link#}
+		<script src="{{asset('assets/scripts/bootstrap.bundle.min.js') }}" defer></script>
+		{% block javascripts %}{% endblock %}
+	</head>
+	{% block body %}
 
+		<body>
+				{% include 'ui/navbar.html.twig' %}
+				
+			<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+				 
+				<div class="app-main">
+					{% include 'ui/sidebar.html.twig' %}
+					
+					{% include 'ui/appBody.html.twig' %}
+					
+
+					{#{% include 'ui/appBody.html.twig'%}#}
+						{#<form>
+							<div class="form-group row"> <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+							<div class="col-sm-10">
+								<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+							</div>
+						</div>
+					</form>#}
+				</div>
+				
+
+			</div>
+			<script type="text/javascript" src="./assets/scripts/main.js"></script>
+		{% endblock %}
+	</body>
+
+</html>

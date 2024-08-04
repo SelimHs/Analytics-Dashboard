@@ -18,4 +18,11 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+    #[Route('/landing', name: 'land')]
+    public function land(): Response
+    {
+        return $this->render('main/landing.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 }
