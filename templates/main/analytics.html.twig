@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Analytics Dashboard</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <link href="{{ asset('main.css') }}" rel="stylesheet" />
+    {# bootstrap stylesheet link #}
+    <link rel="stylesheets" href="{{ asset('assets/bootstrap.min.css') }}" defer>
+    {% block stylesheets %}{% endblock %}
+    {# bootstrap JS link#}
+    <script src="{{ asset('assets/scripts/bootstrap.bundle.min.js') }}" defer></script>
+    {% block javascripts %}{% endblock %}
+</head>
+
+<body>
+    {% include 'ui/navbar.html.twig' %}
+
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-main">
+            {% include "ui/sidebarAnalytics.html.twig"%}
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-graph icon-gradient bg-mean-fruit"></i>
+                                </div>
+                                <div>Analytics</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Widgets start -->
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-midnight-bloom">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Users</div>
+                                        <div class="widget-subheading">Total number of users</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white">
+                                            <span>{{ totalOrders }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-arielle-smile">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Visits</div>
+                                        <div class="widget-subheading">Total number of visits</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white">
+                                            <span>{{ totalNbrVisits }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-grow-early">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Submits</div>
+                                        <div class="widget-subheading">Total number of submits</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white">
+                                            <span>{{ totalNbrSubmits }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-premium-dark">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Success Rate</div>
+                                        <div class="widget-subheading">Percentage of submits to visits</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white">
+                                            <span>{{ successRate|number_format(2, '.', ',') }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Other widgets here -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-header">Analytics Data
+                                    <div class="btn-actions-pane-right">
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th>First Visit</th>
+                                                <th>Last Visit</th>
+                                                <th class="text-center">Number of Visits</th>
+                                                <th>Last Submit</th>
+                                                <th class="text-center">Number of Submits</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for analytic in analyticsData %}
+                                            <tr>
+                                                <td class="text-center text-muted">{{ analytic.id }}</td>
+                                                <td>
+                                                    {{ analytic.firstVisit ? analytic.firstVisit|date('Y-m-d H:i:s') : 'N/A' }}
+                                                </td>
+                                                <td>
+                                                    {{ analytic.lastVisit ? analytic.lastVisit|date('Y-m-d H:i:s') : 'N/A' }}
+                                                </td>
+                                                <td class="text-center">{{ analytic.nbrVisits }}</td>
+                                                <td>
+                                                    {{ analytic.lastSubmit ? analytic.lastSubmit|date('Y-m-d H:i:s') : 'N/A' }}
+                                                </td>
+                                                <td class="text-center">{{ analytic.nbrSubmits }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ path('app_analytics_delete', {'id': analytic.id}) }}"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            <tr>
+                                                <td colspan="7" class="text-center">No data available</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
+                            <div class="app-footer-right">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <span class="text-success">Version 2.1.0</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="app-footer-left">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">© 2024 Your Company</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

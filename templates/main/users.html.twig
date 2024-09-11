@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Analytics Dashboard</title>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+	<meta name="msapplication-tap-highlight" content="no">
+	<link href="{{ asset('main.css') }}" rel="stylesheet" />
+	{# bootstrap stylesheet link #}
+	<link rel="stylesheets" href="{{ asset('assets/bootstrap.min.css') }}" defer>
+	{% block stylesheets %}{% endblock %}
+	{# bootstrap JS link#}
+	<script src="{{ asset('assets/scripts/bootstrap.bundle.min.js') }}" defer></script>
+	{% block javascripts %}{% endblock %}
+</head>
+{#{% block logo %}
+			<div class="logo-container-login">
+			</div>
+			{% endblock %}#}
+{% block body %}
+
+<body>
+	{% include 'ui/navbar.html.twig' %}
+
+	<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+		<div class="app-main">
+			{% include "ui/sidebarUsers.html.twig"%}
+			<div class="app-main__outer">
+				<div class="app-main__inner">
+					<div class="app-page-title">
+						<div class="page-title-wrapper">
+							<div class="page-title-heading">
+								<div class="page-title-icon">
+									<i class="pe-7s-car icon-gradient bg-mean-fruit"></i>
+								</div>
+								<div>Users</div>
+							</div>
+
+						</div>
+					</div>
+                    <div class="row">
+                        <!-- Widgets start -->
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-midnight-bloom">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Users</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white">
+                                            <span>{{ totalUsers }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="main-card mb-3 card">
+								<div class="card-header">Active Users
+									<div class="btn-actions-pane-right">
+										<div style=" width: 4.5rem ">
+											<a class="nav-link btn btn-success"
+												style=" display:flex; justify-content:center"
+												href="{{ path('app_register') }}">Add User</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="table-responsive">
+									<table class="align-middle mb-0 table table-borderless table-striped table-hover">
+										<thead>
+											<tr>
+												<th class="text-center">#</th>
+												<th>Name</th>
+												<th class="text-center">Email</th>
+												<th class="text-center">Role</th>
+												<th class="text-center">Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for user in users %}
+											<tr>
+												<td class="text-center text-muted">{{ user.id }}</td>
+												<td>
+													<div class="widget-content p-0">
+														<div class="widget-content-wrapper">
+															<div class="widget-content-left flex2">
+																<div class="widget-heading">{{ user.firstName }}
+																	{{ user.lastName }}</div>
+															</div>
+														</div>
+													</div>
+												</td>
+												<td class="text-center">{{ user.email }}</td>
+												<td class="text-center">
+													{{ user.getRoles()|join(', ') }}</td>
+												<td class="text-center">
+													<!-- Edit Button -->
+													<a href="{{ path('app_user_edit', {'id': user.id}) }}"
+														class="btn btn-primary btn-sm">Edit</a>
+													<!-- Delete Button -->
+													<a href="{{ path('app_delete', {'id': user.id}) }}"
+														class="btn btn-danger btn-sm"
+														onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+												</td>
+											</tr>
+											{% else %}
+											<tr>
+												<td colspan="5" class="text-center">No users found</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+
+								<div class="d-block text-center card-footer">
+									<button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
+										<i class="pe-7s-trash btn-icon-wrapper"></i>
+									</button>
+									<button class="btn-wide btn btn-success">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="app-wrapper-footer">
+					<div class="app-footer">
+						<div class="app-footer__inner">
+							<div class="app-footer-left">
+								<ul class="nav">
+									<li class="nav-item">
+										<a href="javascript:void(0);" class="nav-link">
+											Footer Link 1
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="javascript:void(0);" class="nav-link">
+											Footer Link 2
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="app-footer-right">
+								<ul class="nav">
+									<li class="nav-item">
+										<a href="javascript:void(0);" class="nav-link">
+											Footer Link 3
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="javascript:void(0);" class="nav-link">
+											<div class="badge badge-success mr-1 ml-0">
+												<small>NEW</small>
+											</div>
+											Footer Link 4
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="./assets/scripts/main.js"></script>
+	{% endblock %}
+</body>
+
+</html>
